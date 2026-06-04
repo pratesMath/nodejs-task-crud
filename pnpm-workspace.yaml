@@ -1,0 +1,3 @@
+minimumReleaseAge: 10080 # defines the minimum number of minutes that must pass after a version is published before pnpm will install it. This applies to all dependencies, including transitive ones.
+blockExoticSubdeps: true # When set to true, it prevents the resolution of exotic protocols (like git+ssh: or direct https: tarballs) in transitive dependencies. Only direct dependencies are allowed to use exotic sources.
+trustPolicy: no-downgrade # When set to no-downgrade, pnpm will fail if a package's trust level has decreased compared to previous releases. For example, if a package was previously published by a trusted publisher but now only has provenance or no trust evidence, installation will fail. This helps prevent installing potentially compromised versions.

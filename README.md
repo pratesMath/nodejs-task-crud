@@ -111,6 +111,33 @@ Use this checklist to help organize your submission:
 - [ ] Use the csv-parse library to read the CSV file
 - [ ] Implement the logic to send a request to POST /tasks for each line of the CSV inside the import script
 
+## Security
+
+Here are some tips to create a secure NodeJS application.
+
+1. Create the NodeJS project using `pnpm` instead of `npm` or `yarn`.
+2. To avoid install malicious npm packages, make some configs:
+   2.1 - create the file below
+
+   ```SH
+   touch pnpm-workspace.yaml
+   ```
+
+   2.2 - let's config this file:
+
+   ```YAML
+   minimumReleaseAge: 10080 # defines the minimum number of minutes that must pass after a version is published before pnpm will install it. This applies to all dependencies, including transitive ones.
+   blockExoticSubdeps: true # When set to true, it prevents the resolution of exotic protocols (like git+ssh: or direct https: tarballs) in transitive dependencies. Only direct dependencies are allowed to use exotic sources.
+   trustPolicy: no-downgrade # When set to no-downgrade, pnpm will fail if a package's trust level has decreased compared to previous releases. For example, if a package was previously published by a trusted publisher but now only has provenance or no trust evidence, installation will fail. This helps prevent installing potentially compromised versions.
+   ```
+
+3. Use clean install commands like `pnpm install --frozen-lockfile` or `pnpm ci`. It's perfect to preserve lockfile and avoid additions of malicious/dangerous scripts. It juts stops and throws an error instead of installing anyways (So this should prevent an attacker from sneaking a swapper version in).
+4. Don't blindly update your packages (`pnpm update`). It's exactly what an attacker is hoping for, so review each upgrade and aky why you need it
+5. Use fewer packages. Yes, try to implement your solution before.
+   5.1. every dependency is another attack surface
+   5.2. most attacks hide in a dependency of a dependency
+6. Pin an exactly version of packages in `package.json` file
+
 <br>
 <div align="center">
   <h2>Thanks 2 everyone!</h2>
