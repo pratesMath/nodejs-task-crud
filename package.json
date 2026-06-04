@@ -2,12 +2,25 @@
 	"name": "nodejs-task-crud",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
+	"main": "server.ts",
+	"type": "module",
+	"license": "ISC",
 	"packageManager": "pnpm@10.33.0",
+	"author": "pratesMath <developer.prates.matheus@gmail.com>",
+	"keywords": [
+		"csv-parser",
+		"NodeJS"
+	],
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"dev": "tsx watch src/server.ts"
 	},
-	"keywords": [],
-	"author": "pratesMath",
-	"license": "ISC"
+	"dependencies": {
+		"csv-parser": "3.2.1"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.4.16",
+		"@types/node": "25.9.1",
+		"tsx": "4.22.3",
+		"typescript": "6.0.3"
+	}
 }
