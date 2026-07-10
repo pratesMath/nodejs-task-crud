@@ -1,12 +1,15 @@
 import http from 'node:http';
 import { jsonMiddleware } from './middlewares/json.middleware.js';
+import { multipartFormDataMiddleware } from './middlewares/multipart-form-data.middleware.js';
 import routes from './routes.js';
 import { extractQueryParams } from './utils/extract-query-params.js';
 
 const server = http.createServer(async (req, res) => {
 	const { method, url } = req;
 
+	await multipartFormDataMiddleware(req, res);
 	await jsonMiddleware(req, res);
+
 	const [pathname] = url!.split('?');
 
 	const route = routes.find(route => {

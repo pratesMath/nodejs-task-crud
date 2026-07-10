@@ -1,8 +1,10 @@
 import crypto from 'node:crypto';
 import { IncomingMessage as Request, ServerResponse as Response } from 'node:http';
+import { Readable } from 'node:stream';
 import { Database } from './database.js';
 import { TaskModel } from './models/task-model.js';
 import { buildRoutePath } from './utils/build-route-path.js';
+import { csvImportStream } from './utils/csv-import-stream.js';
 
 const database = new Database<TaskModel>();
 
@@ -81,6 +83,29 @@ export default [
 			database.update('tasks', id, data);
 
 			return res.writeHead(204).end();
+		},
+	},
+	{
+		method: 'POST',
+		path: buildRoutePath('/tasks/import'),
+		handler: async (req: Request, res: Response) => {
+			if (!req.file) {
+				res.writeHead(400, { 'Content-Type': 'application/json' });
+				return res.end(JSON.stringify({ error: 'No CSV file was provided.' }));
+			}
+
+			try {
+				console.log('Starting CSV import...');
+
+				await csvImportStream(req.file as Readable);
+
+				res.writeHead(201, { 'Content-Type': 'application/json' });
+				return res.end(JSON.stringify({ message: 'Tasks imported successfully!' }));
+			} catch (error) {
+				console.error('Error processing the route:', error);
+				res.writeHead(500, { 'Content-Type': 'application/json' });
+				return res.end(JSON.stringify({ error: 'Internal error while processing the CSV.' }));
+			}
 		},
 	},
 ];
