@@ -1,5 +1,6 @@
-@BASE_URL=http://localhost:7070
-@TASK_ID={{create_task.response.body.data.id}}
+@BASE_URL= http://localhost:7070
+@TASK_ID= {{create_task.response.body.data.id}}
+@ABSOLUTE_PATH_TO_CSV_FILE = /ABSOLUTE_PATH_TO_CSV_FILE/nodejs-task-crud/tasks.csv
 
 ### Create Task
 # @name create_task
@@ -44,3 +45,11 @@ curl \
 	--request 'PATCH' \
 	--url '{{BASE_URL}}/tasks/{{TASK_ID}}/complete' \
 	--header 'accept: application/json'
+
+
+### Import CSV (Try it using Postman-like tools)
+curl \
+	--request 'POST' \
+	--url '{{BASE_URL}}/tasks/import' \
+	--header 'Content-Type: multipart/form-data' \
+	--form 'file=@"{{ABSOLUTE_PATH_TO_CSV_FILE}}"'
