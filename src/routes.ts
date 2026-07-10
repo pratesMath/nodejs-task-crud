@@ -56,4 +56,15 @@ export default [
 			return res.writeHead(204).end();
 		},
 	},
+	{
+		method: 'DELETE',
+		path: buildRoutePath('/tasks/:id'),
+		handler: (req: Request, res: Response) => {
+			const id = req.params?.id as string;
+
+			database.delete('tasks', id);
+
+			return res.writeHead(204).end();
+		},
+	},
 ];
