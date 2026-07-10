@@ -67,4 +67,20 @@ export default [
 			return res.writeHead(204).end();
 		},
 	},
+	{
+		method: 'PATCH',
+		path: buildRoutePath('/tasks/:id/complete'),
+		handler: (req: Request, res: Response) => {
+			const id = req.params?.id as string;
+
+			const data = {
+				updated_at: new Date().toISOString(),
+				completed_at: new Date().toISOString(),
+			} as TaskModel;
+
+			database.update('tasks', id, data);
+
+			return res.writeHead(204).end();
+		},
+	},
 ];
