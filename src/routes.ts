@@ -29,4 +29,13 @@ export default [
 				.end(JSON.stringify({ error: false, message: 'Task created successfully', data }));
 		},
 	},
+	{
+		method: 'GET',
+		path: buildRoutePath('/tasks'),
+		handler: (req: Request, res: Response) => {
+			const search = req.query?.search;
+			const tasks = database.select('tasks', search);
+			return res.writeHead(200).end(JSON.stringify(tasks));
+		},
+	},
 ];
