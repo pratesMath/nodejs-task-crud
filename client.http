@@ -1,0 +1,46 @@
+@BASE_URL=http://localhost:7070
+@TASK_ID={{create_task.response.body.data.id}}
+
+### Create Task
+# @name create_task
+curl \
+	--request 'POST' \
+	--url '{{BASE_URL}}/tasks' \
+	--header 'Content-Type: application/json' \
+	--data '
+		{
+			"title": "Task #01",
+			"description": "Description for Task #01"
+		}
+	'
+
+### List all Tasks
+curl \
+	--request 'GET' \
+	--url '{{BASE_URL}}/tasks' \
+	--header 'Content-Type: application/json'
+
+### Update a Task by id
+curl \
+	--request 'PUT' \
+	--url '{{BASE_URL}}/tasks/{{TASK_ID}}' \
+	--header 'Content-Type: application/json' \
+	--data '
+		{
+			"title": "Task UPDATED",
+			"description": "Description {{TASK_ID}} UPDATED"
+		}
+	'
+
+### Delete a Task by id
+curl \
+	--request 'DELETE' \
+	--url '{{BASE_URL}}/tasks/{{TASK_ID}}' \
+	--header 'Content-Type: application/json'
+
+
+### Complete a Task by id
+curl \
+	--request 'PATCH' \
+	--url '{{BASE_URL}}/tasks/{{TASK_ID}}/complete' \
+	--header 'accept: application/json'

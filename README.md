@@ -117,7 +117,8 @@ Here are some tips to create a secure NodeJS application.
 
 1. Create the NodeJS project using `pnpm` instead of `npm` or `yarn`.
 2. To avoid install malicious npm packages, make some configs:
-   2.1 - create the file below
+
+	 2.1 - create the file below
 
    ```SH
    touch pnpm-workspace.yaml
