@@ -6,4 +6,27 @@ import { buildRoutePath } from './utils/build-route-path.js';
 
 const database = new Database<TaskModel>();
 
-export default [];
+export default [
+	{
+		method: 'POST',
+		path: buildRoutePath('/tasks'),
+		handler: (req: Request, res: Response) => {
+			const { title, description } = req.body as TaskModel;
+
+			const data = {
+				id: crypto.randomUUID(),
+				title,
+				description: description ?? null,
+				completed_at: null,
+				created_at: new Date().toISOString(),
+				updated_at: new Date().toISOString(),
+			} as TaskModel;
+
+			database.insert('tasks', data);
+
+			return res
+				.writeHead(201)
+				.end(JSON.stringify({ error: false, message: 'Task created successfully', data }));
+		},
+	},
+];
