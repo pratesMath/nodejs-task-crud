@@ -38,4 +38,22 @@ export default [
 			return res.writeHead(200).end(JSON.stringify(tasks));
 		},
 	},
+	{
+		method: 'PUT',
+		path: buildRoutePath('/tasks/:id'),
+		handler: (req: Request, res: Response) => {
+			const id = req.params?.id as string;
+			const { title, description } = req.body as TaskModel;
+
+			const data = {
+				title,
+				description,
+				updated_at: new Date().toISOString(),
+			} as TaskModel;
+
+			database.update('tasks', id, data);
+
+			return res.writeHead(204).end();
+		},
+	},
 ];
