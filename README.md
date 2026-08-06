@@ -98,18 +98,18 @@ For routes that receive /:id, in addition to validating whether the id exists in
 
 Use this checklist to help organize your submission:
 
-- [ ] Develop the POST /tasks route to create a new task
-- [ ] Develop the GET /tasks route to list all tasks
-- [ ] Implement search functionality by title and description in the GET /tasks route
-- [ ] Develop the PUT /tasks/:id route to update a task
-- [ ] Add existence validation for the id in the PUT /tasks/:id route
-- [ ] Develop the DELETE /tasks/:id route to remove a task
-- [ ] Add existence validation for the id in the DELETE /tasks/:id route
-- [ ] Develop the PATCH /tasks/:id/complete route to mark a task as completed/pending
-- [ ] Add existence validation for the id in the PATCH /tasks/:id/complete route
-- [ ] Create a separate script for task import
-- [ ] Use the csv-parse library to read the CSV file
-- [ ] Implement the logic to send a request to POST /tasks for each line of the CSV inside the import script
+- [X] Develop the POST /tasks route to create a new task
+- [X] Develop the GET /tasks route to list all tasks
+- [X] Implement search functionality by title and description in the GET /tasks route
+- [X] Develop the PUT /tasks/:id route to update a task
+- [X] Add existence validation for the id in the PUT /tasks/:id route
+- [X] Develop the DELETE /tasks/:id route to remove a task
+- [X] Add existence validation for the id in the DELETE /tasks/:id route
+- [X] Develop the PATCH /tasks/:id/complete route to mark a task as completed/pending
+- [X] Add existence validation for the id in the PATCH /tasks/:id/complete route
+- [X] Create a separate script for task import
+- [X] Use the csv-parse library to read the CSV file
+- [X] Implement the logic to send a request to POST /tasks for each line of the CSV inside the import script
 
 ## Security
 
